@@ -1,0 +1,155 @@
+<div class="main-wrapper pb-0 mb-0">
+  <div class="timeline-wrapper">
+    <div class="timeline-header">
+      <div class="container-fluid p-0">
+        <div class="row no-gutters align-items-center">
+          <div class="col-lg-6">
+            <div class="timeline-logo-area d-flex align-items-center">
+              <div class="timeline-logo">
+                <a href="#">
+                  <img src="assets/images/logo/logo.png" alt="timeline logo">
+                </a>
+              </div>
+              <div class="timeline-tagline">
+                <h6 class="tagline">It’s helps you to connect and share with the people in your life</h6>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <form class="login-area" [formGroup]="loginForm">
+              <div class="row align-items-center">
+                <div class="col-12 col-sm">
+                  <input formControlName="mail" type="text" placeholder="Email or Username" class="single-field">
+                </div>
+                <div class="col-12 col-sm">
+                  <input formControlName="password" type="password" placeholder="Password" class="single-field">
+                </div>
+                <div class="col-12 col-sm-auto">
+                  <button class="login-btn" (click)="submitLoginForm()">Login</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="timeline-page-wrapper">
+      <div class="container-fluid p-0">
+        <div class="row no-gutters">
+          <div class="col-lg-6 order-2 order-lg-1">
+            <div class="timeline-bg-content">
+              <!-- <h3 class="timeline-bg-title">Welcome to Ago.</h3> -->
+            </div>
+          </div>
+          <div class="col-lg-6 order-1 order-lg-2 d-flex align-items-center justify-content-center">
+            <div class="signup-form-wrapper">
+              <!-- <h1 class="create-acc text-center">Create An Account</h1> -->
+              <div class="signup-inner text-center">
+                <h3 class="title">Create An Account</h3>
+                <form class="signup-inner--form" [formGroup]="registerForm">
+                  <div class="row">
+                    <div class="col-12">
+
+                      <div class="example-container">
+                        <mat-form-field>
+                          <input matInput placeholder="Email" formControlName="mail">
+                          <mat-error
+                            *ngIf="registerForm.controls['mail'].touched && registerForm.controls['mail'].invalid">{{utils.getMessError(registerForm.controls['mail'].errors)}}</mat-error>
+                        </mat-form-field>
+                      </div>
+                    </div>
+
+                    <div class="col-md-6">
+                      <div class="example-container">
+                        <mat-form-field>
+                          <input matInput placeholder="Firstname" formControlName="firstName">
+                          <mat-error
+                            *ngIf="registerForm.controls['firstName'].touched && registerForm.controls['firstName'].invalid">{{utils.getMessError(registerForm.controls['firstName'].errors)}}</mat-error>
+                        </mat-form-field>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="example-container">
+                        <mat-form-field>
+                          <input matInput placeholder="Lastname" formControlName="lastName">
+                          <mat-error
+                            *ngIf="registerForm.controls['lastName'].touched && registerForm.controls['lastName'].invalid">{{utils.getMessError(registerForm.controls['lastName'].errors)}}</mat-error>
+                        </mat-form-field>
+                      </div>
+                    </div>
+
+                    <div class="col-12">
+                      <mat-form-field>
+                        <input matInput [type]="hide ? 'password' : 'text'" formControlName="password"
+                          placeholder="Password">
+                        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                          [attr.aria-pressed]="hide">
+                          <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                        </button>
+                        <mat-error
+                          *ngIf="registerForm.controls['password'].touched && registerForm.controls['password'].invalid">{{utils.getMessError(registerForm.controls['password'].errors)}}</mat-error>
+                      </mat-form-field>
+                    </div>
+                    <div class="col-md-6">
+                      <mat-form-field>
+                        <mat-label>Gender</mat-label>
+                        <mat-select formControlName="gender">
+                          <mat-option value="male">Male</mat-option>
+                          <mat-option value="female">Female</mat-option>
+                        </mat-select>
+                        <mat-error
+                          *ngIf="registerForm.controls['gender'].touched && registerForm.controls['gender'].invalid">{{utils.getMessError(registerForm.controls['gender'].errors)}}</mat-error>
+                      </mat-form-field>
+                    </div>
+                    <div class="col-md-6">
+                      <mat-form-field>
+                        <mat-label>Age</mat-label>
+                        <mat-select formControlName="age">
+                          <mat-option value="18+">18+</mat-option>
+                          <mat-option value="18-">18-</mat-option>
+                        </mat-select>
+                        <mat-error
+                          *ngIf="registerForm.controls['age'].touched && registerForm.controls['age'].invalid">{{utils.getMessError(registerForm.controls['age'].errors)}}</mat-error>
+                      </mat-form-field>
+                    </div>
+                    <div class="col-12">
+                      <mat-form-field>
+                        <mat-label>Countries</mat-label>
+                        <mat-select formControlName="address">
+                          <mat-option value="ThaiLand">ThaiLand</mat-option>
+                          <mat-option value="Indonesia">Indonesia</mat-option>
+                          <mat-option value="Australia">Malaysia</mat-option>
+                          <mat-option value="China">China</mat-option>
+                          <mat-option value="VietNam">VietNam</mat-option>
+                          <mat-option value="Laos">Laos</mat-option>
+                          <mat-option value="Campuchia">Campuchia</mat-option>
+                          <mat-option value="Philippines">Philippines</mat-option>
+                          <mat-option value="Singapore">Singapore</mat-option>
+                          <mat-option value="Korea">Korea</mat-option>
+                          <mat-option value="Japan">Japan</mat-option>
+                          <mat-option value="USA">USA</mat-option>
+                          <mat-option value="England">England</mat-option>
+                          <mat-option value="Canada">Canada</mat-option>
+                          <mat-option value="Russia">Russia</mat-option>
+                          <mat-option value="Germany">Germany</mat-option>
+                          <mat-option value="France">France</mat-option>
+                        </mat-select>
+                        <mat-error
+                          *ngIf="registerForm.controls['address'].touched && registerForm.controls['address'].invalid">{{utils.getMessError(registerForm.controls['address'].errors)}}</mat-error>
+                      </mat-form-field>
+                    </div>
+                    <div class="col-12">
+                      <button (click)="submitRegisterForm()" class="submit-btn">Create Account</button>
+                    </div>
+                  </div>
+                  <h6 class="terms-condition">You account password, <a (click)="openForgotPass()"> please change
+                      password</a></h6>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

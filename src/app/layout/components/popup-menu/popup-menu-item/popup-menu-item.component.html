@@ -1,0 +1,57 @@
+<li class="msg-list-item d-flex justify-content-between" *ngIf="notificationData || relationShipData">
+  <ng-container *ngIf="type === 'notification'; else message">
+    <!-- profile picture end -->
+    <div class="profile-thumb">
+      <ng-container *ngFor="let ava of notificationData.userEntity.avatars">
+        <figure class="profile-thumb-middle" *ngFor="let url of ava | postImagePipe | async">
+          <img [src]="url" alt="profile picture">
+        </figure>
+      </ng-container>
+    </div>
+    <!-- profile picture end -->
+
+    <!-- message content start -->
+    <div class="msg-content">
+      <h6 class="author"><a href="#">{{notificationData.userEntity.firstName + ' ' +
+          notificationData.userEntity.lastName}}</a></h6>
+      <p>{{notificationData.content}}</p>
+    </div>
+    <!-- message content end -->
+
+    <!-- message time start -->
+    <div class="msg-time">
+      <p>{{utils.convertTimeToNotify(utils.getTimestamp(notificationData.createDate + ''))}}</p>
+    </div>
+    <!-- message time end -->
+  </ng-container>
+  <ng-template #message>
+    <ng-container *ngIf="relationShipData?.messages?.length; else noMessage">
+      <!-- profile picture end -->
+      <div class="profile-thumb">
+        <ng-container *ngFor="let avatar of friend.avatars">
+          <figure class="profile-thumb-middle" *ngFor="let url of avatar | postImagePipe | async">
+            <img [src]="url" alt="profile picture">
+          </figure>
+        </ng-container>
+      </div>
+      <!-- profile picture end -->
+
+      <!-- message content start -->
+      <div class="msg-content" (click)="showMessage(friend)">
+        <h6 class="author"><a (click)="showMessage(friend)">{{friend.firstName + ' ' + friend.lastName}}</a></h6>
+        <p>{{messageDisplay?.content}}</p>
+      </div>
+      <!-- message content end -->
+
+      <!-- message time start -->
+      <div class="msg-time">
+        <p>{{utils.convertTimeToNotify(utils.getTimestamp(messageDisplay?.createDate + ''))}}</p>
+      </div>
+      <!-- message time end -->
+    </ng-container>
+
+    <ng-template #noMessage>
+      <span>No messages yet.</span>
+    </ng-template>
+  </ng-template>
+</li>

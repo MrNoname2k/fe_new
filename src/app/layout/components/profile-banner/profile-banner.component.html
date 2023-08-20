@@ -1,0 +1,44 @@
+<div class="profile-banner-large">
+  <ng-container *ngFor="let urlImg of bannerPost | postImagePipe | async">
+    <img [src]="urlImg" alt="">
+  </ng-container>
+</div>
+<div class="profile-menu-area bg-white secondary-navigation-style">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-lg-3 col-md-3">
+        <div class="profile-picture-box">
+          <figure class="profile-picture">
+            <ng-container *ngIf="!avatarPost">
+              <img src="../../../../assets/images/profile/profile-sr-1.jpg" alt="">
+            </ng-container>
+            <ng-container *ngFor="let urlImg of avatarPost | postImagePipe | async">
+              <img [src]="urlImg" alt="">
+            </ng-container>
+          </figure>
+        </div>
+      </div>
+      <div class="col-lg-6 col-md-6 offset-lg-1">
+        <div class="profile-menu-wrapper">
+          <div class="main-menu-inner header-top-navigation">
+            <nav>
+              <ul class="main-menu">
+                <li><a (click)="timeLine()">timeline</a></li>
+                <li><a (click)="about()">about</a></li>
+                <li><a >photos</a></li>
+                <li><a href="#">friends</a></li>
+                <li><a href="#">more</a></li>
+                <!-- <li class="d-inline-block d-md-none"><a href="profile.html">edit profile</a></li> -->
+              </ul>
+            </nav>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-2 col-md-3 d-none d-md-block">
+        <div class="profile-edit-panel">
+          <a class="edit-btn" [routerLink]="['/your-account']">edit profile</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,58 @@
+@import "../../../../../styles/scss/variables";
+
+li {
+  margin-right: 0;
+  &.msg-list-item {
+    cursor: pointer;
+    margin-right: 0;
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid $bdr-color;
+    .profile-thumb {
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      overflow: hidden;
+    }
+    .msg-content {
+      padding-left: 10px;
+      width: calc(100% - 150px);
+      p {
+        font-size: 13px;
+        font-weight: 400;
+        line-height: 1.4;
+        padding-top: 3px;
+      }
+      &.notification-content {
+        a {
+          display: inline-block;
+          color: $black-soft;
+          &:hover {
+            color: $theme-color;
+          }
+        }
+        p {
+          display: inline;
+        }
+      }
+    }
+    .msg-time {
+      font-size: 12px;
+      color: $paragraph-light;
+      width: 100px;
+      text-align: right;
+    }
+    .author {
+      font-size: 14px;
+      font-weight: 800;
+      line-height: 1;
+      text-transform: capitalize;
+      a {
+        color: $black-soft;
+        &:hover {
+          color: $theme-color;
+        }
+      }
+    }
+  }
+}

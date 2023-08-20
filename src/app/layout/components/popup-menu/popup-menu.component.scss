@@ -1,0 +1,77 @@
+@import "../../../../styles/scss/variables";
+
+.popup-notification {
+  width: 500px;
+  height: auto;
+  padding: 15px;
+  background-color: $white;
+  border-radius: 0 0 2px 2px;
+  box-shadow: 0px 1px 15px 0px rgba(51, 51, 51, 0.2);
+  li {
+    a {
+      padding: 0;
+    }
+  }
+
+  .dropdown-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid $bdr-color;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    .recent-msg {
+      font-size: 14px;
+      font-weight: 500;
+      line-height: 1;
+      color: $black-soft;
+      text-transform: capitalize;
+    }
+    .message-btn-group {
+      button {
+        font-size: 12px;
+        font-weight: 400;
+        line-height: 1;
+        color: $paragraph-light;
+        margin-left: 20px;
+        &:hover {
+          color: $theme-color;
+          text-decoration: underline;
+        }
+        &:first-child {
+          margin-left: 0;
+        }
+      }
+    }
+    button {
+      &:hover {
+        color: $theme-color;
+      }
+    }
+  }
+  .msg-dropdown-footer {
+    display: flex;
+    justify-content: space-between;
+    button {
+      font-size: 12px;
+      font-weight: 400;
+      line-height: 1;
+      color: $paragraph-light;
+      &:hover {
+        color: $theme-color;
+        text-decoration: underline;
+      }
+    }
+  }
+  .dropdown-msg-list {
+   
+  }
+}
+
+::ng-deep .mat-mdc-menu-panel.mat-mdc-menu-panel {
+  max-width: none;
+
+  .mat-mdc-menu-content {
+    padding: 0;
+  }
+}

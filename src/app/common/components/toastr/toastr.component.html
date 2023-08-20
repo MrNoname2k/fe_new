@@ -1,0 +1,21 @@
+<div class="toastr-container">
+  <div class="toastr-header">
+    <strong class="mr-auto">{{ title }}</strong>
+    <button type="button" class="toastr-btn--close" (click)="dismiss()">
+      <span>&times;</span>
+    </button>
+  </div>
+  <div class="toastr-body">
+    <figure class="toastr-body__img">
+      <ng-container *ngFor="let url of data.userEntity?.avatars[0] | postImagePipe | async">
+        <img [src]="url" alt="">
+      </ng-container>
+    </figure>
+    <div class="toasrt-body__text">
+      <span class="toastr-body__message">{{message}}</span>
+      <div class="toastr-body__details">
+        <span class="toastr-body__time">Just Now.</span>
+      </div>
+    </div>
+  </div>
+</div>

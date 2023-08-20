@@ -1,0 +1,23 @@
+<div class="popup-notification">
+  <div class="dropdown-title" *ngIf="popupProperties">
+    <p class="recent-msg">{{popupProperties.title}}</p>
+    <div class="message-btn-group">
+      <ng-container *ngIf="popupProperties.apply === 'message'; else notMessage">
+        <button>New group</button>
+        <button>New Message</button>
+      </ng-container>
+      <ng-template #notMessage>
+        <button>Edit</button>
+      </ng-template>
+    </div>
+  </div>
+  <ul class="dropdown-msg-list" *ngIf="popupProperties.data">
+    <ng-container *ngFor="let item of popupProperties.data?.slice(0,5)">
+      <app-popup-menu-item [type]="popupProperties.apply" [data]="item"></app-popup-menu-item>
+    </ng-container>
+  </ul>
+  <div class="msg-dropdown-footer">
+    <button>See all in messenger</button>
+    <button>Mark All as Read</button>
+  </div>
+</div>

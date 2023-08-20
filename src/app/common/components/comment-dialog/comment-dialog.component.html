@@ -1,0 +1,197 @@
+<div class="dialog-container">
+  <div class="dialog-header">
+    <h3 class="post-title">{{post.idUserCreate.lastName + post.idUserCreate.firstName}}'s Post</h3>
+    <button mat-icon-button mat-dialog-close>
+      <mat-icon>clear</mat-icon>
+    </button>
+  </div>
+  <div class="dialog-content">
+    <div class="content-top">
+      <div class="content-top-left">
+        <!-- <div _ngcontent-kni-c115="" class="profile-thumb">
+          <a _ngcontent-kni-c115="" href="#">
+            <figure _ngcontent-kni-c115="" class="profile-thumb-middle">
+              <img _ngcontent-kni-c115="" src="assets/images/profile/profile-small-1.jpg" alt="profile picture">
+            </figure>
+          </a>
+        </div> -->
+        <div class="profile-thumb">
+          <a (click)="navigateService.navigateToPage('/profile', post.idUserCreate.id)">
+            <ng-container *ngFor="let ava of post.idUserCreate.avatars">
+              <ng-container *ngFor="let url of ava | postImagePipe | async">
+                <figure class="profile-thumb-middle">
+                  <img [src]="url ? url : '../../../../assets/images/profile/profile-small-10.jpg'"
+                    alt="profile picture">
+                </figure>
+              </ng-container>
+            </ng-container>
+          </a>
+        </div>
+        <!--  -->
+        <div _ngcontent-etd-c115="" class="posted-author">
+          <h6 _ngcontent-etd-c115="" class="author"><a _ngcontent-etd-c115=""
+              (click)="navigateService.navigateToPage('/profile', post.idUserCreate.id)">{{post.idUserCreate.lastName +
+              post.idUserCreate.firstName}}</a></h6>
+          <span _ngcontent-etd-c115="" class="post-time">{{utils.convertTimeToNotify(utils.getTimestamp(post.createDate
+            + ''))}}</span>
+        </div>
+      </div>
+      <!-- <div class="content-top-edit">
+        <div _ngcontent-vym-c115="" class="post-settings-bar"><span _ngcontent-vym-c115=""></span><span
+            _ngcontent-vym-c115=""></span><span _ngcontent-vym-c115=""></span>
+          <div _ngcontent-vym-c115="" class="post-settings arrow-shape">
+            <ul _ngcontent-vym-c115="">
+              <li _ngcontent-vym-c115=""><button _ngcontent-vym-c115="">copy link to adda</button></li>
+              <li _ngcontent-vym-c115=""><button _ngcontent-vym-c115="">edit post</button></li>
+              <li _ngcontent-vym-c115=""><button _ngcontent-vym-c115="">embed adda</button></li>
+            </ul>
+          </div>
+        </div>
+      </div> -->
+    </div>
+    <div class="content-center">
+      <span class="content-text">
+        {{post.content | summary: 100}}
+      </span>
+      <div class="content-img">
+        <!-- <img src="assets/images/post/post-1.jpg" alt=""> -->
+        <mat-grid-list cols="2" rowHeight="fit" class="image-group" gutterSize="3">
+          <mat-grid-tile class="image-item" *ngFor="let item of post | postImagePipe | async; let i = index"
+            [colspan]="post.fileEntities.length === 1 ? 2 : 1">
+            <img [src]="item" />
+          </mat-grid-tile>
+        </mat-grid-list>
+      </div>
+
+      <div class="content-action">
+        <div class="like-action">
+          <button class="post-meta-like" appLikeEvent [data]="post">
+            <i class="bi bi-heart-beat"></i>
+            <span class="listLiker">{{post.likes | listLikePipe}}</span>
+          </button>
+        </div>
+        <div class="comment-and-share">
+          <button _ngcontent-uwx-c115="" class="post-comment"><i _ngcontent-uwx-c115=""
+              class="bi bi-chat-bubble"></i><span _ngcontent-uwx-c115="">{{commentList.length}}</span></button>
+          <!-- <button _ngcontent-htc-c115="" class="post-share"><i _ngcontent-htc-c115="" class="bi bi-share"></i><span
+              _ngcontent-htc-c115="">07</span></button> -->
+        </div>
+      </div>
+    </div>
+    <div class="comment-area" *ngIf="commentTransport.length > 0; else noComments">
+      <div class="comment-bean" *ngFor="let comment of commentTransport.slice(0, numberOfComments); let i = index">
+
+        <div class="bean-img">
+          <img src="../../../../assets/images/profile/profile-small-10.jpg" alt="">
+        </div>
+        <span class="bean-content">
+          <div class="bean-options">
+            <button class="btn btn-option" [matMenuTriggerFor]="menu">
+              <mat-icon>menu</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu" xPosition="before" class="option-menu">
+              <button mat-menu-item
+                (click)="editIndex = i; isShow = -1; showReplyIndex = -1; editReplyIndex = -1; editText = comment.mainComment.content">Edit</button>
+              <button mat-menu-item (click)="deleteComment(comment.mainComment.id)">Delete</button>
+            </mat-menu>
+          </div>
+          <div class="comment-title">
+            <h5 class="content-user">{{comment.mainComment.userEntityComment.firstName +' '+ comment.mainComment.userEntityComment.lastName}}</h5>
+            <p class="comment-timestap">
+              {{utils.convertTimeToNotify(utils.getTimestamp(comment.mainComment.createDate))}}</p>
+          </div>
+          <p class="content-text" *ngIf="editIndex !== i; else notEditting">
+            {{comment.mainComment.content}}
+          </p>
+
+          <ng-template #notEditting>
+            <div class="comment-area">
+              <mat-form-field>
+                <input matInput placeholder="Write something...." [(ngModel)]="editText">
+                <mat-icon matSuffix (click)="editComment(comment.mainComment)">send</mat-icon>
+              </mat-form-field>
+            </div>
+          </ng-template>
+          <div class="comment-actions">
+            <span class="comment-reply"
+              (click)="isShow = i; showReplyIndex = -1; editReplyIndex = -1; editIndex = -1">Reply</span>
+          </div>
+          <div class="reply-area" [ngClass]="{'show': isShow === i, 'hide' : isShow !== i}">
+            <mat-form-field>
+              <input matInput placeholder="Write something..." [(ngModel)]="replyText">
+              <mat-icon matSuffix (click)="sendReply(comment.mainComment.id)">send</mat-icon>
+            </mat-form-field>
+          </div>
+
+          <div class="reply-comment-area">
+            <div class="reply-comments"
+              *ngFor="let reply of comment.replyComments.slice(0, numberOfReplys); let j = index">
+              <div class="reply-options">
+                <button class="btn btn-option" [matMenuTriggerFor]="menu">
+                  <mat-icon>menu</mat-icon>
+                </button>
+                <mat-menu #menu="matMenu" xPosition="before" class="option-menu">
+                  <button mat-menu-item
+                    (click)="editReplyIndex = j; isShow = -1; showReplyIndex = -1; editIndex = -1; editReplyText = reply.content">Edit</button>
+                  <button mat-menu-item (click)="deleteReplyComment(reply.id)">Delete</button>
+                </mat-menu>
+              </div>
+              <div class="bean-img">
+                <img src="assets/images/profile/profile-small-1.jpg" alt="">
+              </div>
+              <span class="bean-content-reply">
+                <div class="comment-title">
+                  <h5 class="content-user">{{reply.userEntityComment.firstName +' '+reply.userEntityComment.lastName}}</h5>
+                  <p class="comment-timestap">{{utils.convertTimeToNotify(utils.getTimestamp(reply.createDate))}}</p>
+                </div>
+                <p class="content-text" *ngIf="editReplyIndex !== j; else notEdittingReply">
+                  {{reply.content}}
+                </p>
+
+                <ng-template #notEdittingReply>
+                  <div class="comment-area">
+                    <mat-form-field>
+                      <input matInput placeholder="Write something..." [(ngModel)]="editReplyText">
+                      <mat-icon matSuffix (click)="editReplyComment(reply)">send</mat-icon>
+                    </mat-form-field>
+                  </div>
+                </ng-template>
+
+                <div class="comment-actions">
+                  <span class="comment-reply"
+                    (click)="showReplyIndex = j; isShow = -1; editIndex = -1; editReplyIndex = -1">Reply</span>
+                </div>
+                <div class="reply-area" [ngClass]="{'show': showReplyIndex === j, 'hide' : showReplyIndex !== j}">
+                  <mat-form-field>
+                    <input matInput placeholder="Write something..." [(ngModel)]="replyText">
+                    <mat-icon matSuffix (click)="sendReply(comment.mainComment.id)">send</mat-icon>
+                  </mat-form-field>
+                </div>
+              </span>
+            </div>
+            <button class="loadmore-btn" (click)="loadmore('reply')"
+              *ngIf="numberOfReplys < comment.replyComments.length">
+              {{comment.replyComments.length - numberOfReplys + ' replies'}}
+            </button>
+          </div>
+        </span>
+      </div>
+
+      <button class="loadmore-btn" (click)="loadmore('comment')" *ngIf="commentTransport.length > numberOfComments">
+        {{ commentTransport.length - numberOfComments + ' comments'}}
+      </button>
+    </div>
+
+    <ng-template #noComments>
+      <span class="no-comment">No Comments.</span>
+    </ng-template>
+  </div>
+  <div class="comment-action">
+    <div class="comment-area">
+      <mat-form-field>
+        <input matInput placeholder="Write something..." [(ngModel)]="commentText">
+        <mat-icon matSuffix (click)="sendComment()">send</mat-icon>
+      </mat-form-field>
+    </div>
+  </div>
+</div>

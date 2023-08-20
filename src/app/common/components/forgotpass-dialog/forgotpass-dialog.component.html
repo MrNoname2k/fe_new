@@ -1,0 +1,18 @@
+<div class="dialog-container">
+  <div class="dialog-header">
+    <h3 class="post-title">Forgot Password</h3>
+    <button mat-icon-button mat-dialog-close>
+      <mat-icon>clear</mat-icon>
+    </button>
+  </div>
+  <div class="dialog-content">
+    <div class="content-center">
+      <div class="example-container">
+        <mat-form-field>
+          <input matInput type="text" placeholder="Email" [(ngModel)]="mail">
+        </mat-form-field>
+        <button class="submit-btn" mat-dialog-close (click)="submit()">Submit</button>
+      </div>
+    </div>
+  </div>
+</div>

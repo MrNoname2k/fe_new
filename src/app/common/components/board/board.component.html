@@ -1,0 +1,150 @@
+<div class="card widget-item">
+  <h4 class="widget-title">{{getBoardTitle(key)}}</h4>
+  <div class="widget-body">
+
+    <!-- Adv Board -->
+    <ng-container *ngIf="key === 'adv'">
+      <div class="add-thumb">
+        <a href="#">
+          <img alt="advertisement">
+        </a>
+      </div>
+    </ng-container>
+
+    <!-- Info Board -->
+    <!-- <ng-container *ngIf="key === 'friendZone'">
+      <div class="about-author">
+        <p></p>
+        <ul class="author-into-list">
+          <li><a href="#"><i class="bi bi-office-bag"></i></a></li>
+          <li><a href="#"><i class="bi bi-home"></i></a></li>
+          <li><a href="#"><i class="bi bi-location-pointer"></i></a></li>
+          <li><a href="#"><i class="bi bi-heart-beat"></i></a></li>
+        </ul>
+      </div>
+    </ng-container> -->
+
+    <!-- Memory Board -->
+    <!-- <ng-container>
+      <div class="sweet-galley img-gallery">
+        <div class="row row-5">
+          <div class="col-4">
+            <div class="gallery-tem">
+              <figure class="post-thumb">
+                <a class="gallery-selector" href="assets/images/gallery/gallery-1.jpg">
+                  <img alt="sweet memory">
+                </a>
+              </figure>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-container> -->
+
+    <!-- Notifi Board -->
+    <ng-container *ngIf="key === 'notifications'">
+      <ul class="like-page-list-wrapper">
+        <li class="unorder-list" *ngFor="let notify of asideData.notifications">
+          <div class="profile-thumb">
+            <a href="#">
+              <ng-container *ngFor="let avatar of  notify.userEntity.avatars">
+                <figure class="profile-thumb-small" *ngFor="let url of avatar | postImagePipe | async">
+                  <img [src]="url" alt="profile picture">
+                </figure>
+              </ng-container>
+            </a>
+          </div>
+
+          <div class="unorder-list-info">
+            <h3 class="list-title"><a href="#">{{notify.content}}</a></h3>
+            <p class="list-subtitle">{{utils.convertTimeToNotify(utils.getTimestamp(notify.createDate!))}}<a
+                href="#"></a></p>
+          </div>
+        </li>
+      </ul>
+    </ng-container>
+
+    <!-- New Board  -->
+    <ng-container *ngIf="key === 'news'">
+      <ul class="like-page-list-wrapper">
+        <li class="unorder-list" *ngFor="let new of asideData.news">
+
+          <div class="profile-thumb">
+            <a href="#">
+              <figure class="profile-thumb-small">
+                <img [src]="new.image" alt="profile picture">
+              </figure>
+            </a>
+          </div>
+          <div class="unorder-list-info">
+            <h3 class="list-title">{{new.title}}<a href="#"></a></h3>
+            <p class="list-subtitle">{{new.subTitle}}<a href="#"></a></p>
+          </div>
+        </li>
+      </ul>
+    </ng-container>
+
+    <!-- Friend Board -->
+    <ng-container *ngIf="key === 'friendZone'">
+      <ul class="like-page-list-wrapper">
+        <li class="unorder-list" *ngFor="let user of asideData.friendZone?.slice(0, 10)">
+
+          <div class="profile-thumb">
+            <a (click)="navigateService.navigateToPage('/profile', user.id)">
+              <ng-container *ngIf="user.avatars?.length === 0; else noAva">
+                <figure class="profile-thumb-small">
+                  <img src="../../../../assets/images/profile/profile-small-10.jpg" alt="profile picture">
+                </figure>
+              </ng-container>
+              <ng-template #noAva>
+                <ng-container *ngFor="let avatar of user.avatars">
+                  <figure class="profile-thumb-small" *ngFor="let url of avatar | postImagePipe | async">
+                    <img [src]="url ? url : '../../../../assets/images/profile/profile-small-10.jpg'"
+                      alt="profile picture">
+                  </figure>
+                </ng-container>
+              </ng-template>
+            </a>
+          </div>
+          <div class="unorder-list-info">
+            <h3 class="list-title"><a (click)="navigateService.navigateToPage('/profile', user.id)">{{user.firstName + '
+                ' + user.lastName}}</a></h3>
+            <p class="list-subtitle"><a href="#"></a></p>
+          </div>
+
+          <button class="like-button" (click)="addFriend(user.id)">
+            <img class="heart" src="assets/images/icons/heart.png" alt="">
+            <img class="heart-color" src="assets/images/icons/heart-color.png" alt="">
+          </button>
+
+        </li>
+      </ul>
+    </ng-container>
+
+    <!-- Page Board -->
+    <ng-container *ngIf="key === 'pages'">
+      <ul class="like-page-list-wrapper">
+        <li class="unorder-list">
+
+          <div class="profile-thumb">
+            <a href="#">
+              <figure class="profile-thumb-small">
+                <img alt="profile picture">
+              </figure>
+            </a>
+          </div>
+
+          <div class="unorder-list-info">
+            <h3 class="list-title"><a href="#"></a></h3>
+            <p class="list-subtitle"><a href="#"></a></p>
+          </div>
+
+          <button class="like-button active">
+            <img class="heart" src="assets/images/icons/heart.png" alt="">
+            <img class="heart-color" src="assets/images/icons/heart-color.png" alt="">
+          </button>
+        </li>
+      </ul>
+    </ng-container>
+  </div>
+</div>

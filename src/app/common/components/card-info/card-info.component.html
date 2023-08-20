@@ -1,0 +1,28 @@
+<div class="card card-profile widget-item p-0">
+  <div class="profile-banner">
+    <figure class="profile-banner-small">
+      <button (click)="navigatePageService.navigateToPage('/profile', userInfoData['id'])">
+        <ng-container *ngIf="!bannerPost">
+          <img src="../../../../assets/images/post/post-1.jpg" alt="">
+        </ng-container>
+        <ng-container *ngFor="let urlImg of bannerPost | postImagePipe | async">
+          <img [src]="urlImg" alt="">
+        </ng-container>
+      </button>
+      <button (click)="navigatePageService.navigateToPage('/profile', userInfoData['id'])" class="profile-thumb-2">
+        <ng-container *ngIf="!avatarPost">
+          <img src="../../../../assets/images/profile/profile-small-1.jpg" alt="">
+        </ng-container>
+        <ng-container *ngFor="let urlImg of avatarPost | postImagePipe | async">
+          <img [src]="urlImg" alt="">
+        </ng-container>
+      </button>
+    </figure>
+    <div class="profile-desc text-center">
+      <h6 class="author"><a
+          (click)="navigatePageService.navigateToPage('/profile', userInfoData['id'])">{{userInfoData['firstName'] + ' '
+          + userInfoData['lastName']}}</a></h6>
+      <p>{{userInfoData.description}}</p>
+    </div>
+  </div>
+</div>

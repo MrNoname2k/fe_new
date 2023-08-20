@@ -1,0 +1,116 @@
+<div class="dialog">
+  <div class="dialog-header">
+    <span class="dialog-heading">{{heading}}</span>
+    <button mat-dialog-close="" type="button" class="close">
+      <span>&times;</span>
+    </button>
+  </div>
+  <div class="access-modifier">
+    <button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+      <mat-icon>{{accessType}}</mat-icon>
+      <mat-icon>arrow_drop_down</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu" xPosition="before">
+      <button mat-menu-item (click)="onChooseAccessType('public')" [disabled]="accessType ==='public'">
+        <mat-icon>public</mat-icon>
+        <span>Public</span>
+      </button>
+      <button mat-menu-item (click)="onChooseAccessType('public_off')" [disabled]="accessType ==='public_off'">
+        <mat-icon>public_off</mat-icon>
+        <span>Private</span>
+      </button>
+      <button mat-menu-item (click)="onChooseAccessType('people')" [disabled]="accessType ==='people'">
+        <mat-icon>people</mat-icon>
+        <span>Friends</span>
+      </button>
+    </mat-menu>
+  </div>
+  <form *ngIf="data.type === 'post'; else avatar">
+    <div class="dialog-content">
+      <textarea name="share" class="share-field-big" placeholder="Say Something" [(ngModel)]="content"></textarea>
+    </div>
+    <div class="share-choose-file">
+      <mat-accordion class="example-headers-align">
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              <mat-icon>cloud_upload</mat-icon>
+              <span>Upload some images or videos</span>
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <div class="upload-container">
+            <label for="upload-media" [ngClass]="media.length > 0 ? 'zoomOut' : ''">
+              <mat-icon>photo_library</mat-icon>
+              <span>Add images/vides</span>
+            </label>
+            <mat-grid-list cols="2" rowHeight="fit" class="image-group" *ngIf="media.length > 0" gutterSize="3">
+              <mat-grid-tile *ngFor="let item of media; let i = index" [colspan]="media.length === 1 ? 2 : 1">
+                <div class="media-wrap">
+                  <button class="cancal-btn" (click)="removeImage(i)">
+                    <mat-icon>clear</mat-icon>
+                  </button>
+                  <img *ngIf="item.type === 'image/jpeg'" [src]="item.url" alt="">
+                  <video *ngIf="item.type === 'video/mp4'" [src]="item.url"></video>
+                </div>
+              </mat-grid-tile>
+            </mat-grid-list>
+            <input hidden type="file" id="upload-media" (change)="onChangeFiles($event)" multiple>
+          </div>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+  </form>
+
+  <ng-template #avatar>
+
+    <div class="avatar-control" *ngIf="!isChoosed">
+      <div class="avatar">
+        <div class="upload">
+          <label for="upload-media">
+            <mat-icon>photo_library</mat-icon>
+            <span>Upload Image</span>
+          </label>
+          <input hidden type="file" id="upload-media" (change)="onChangeAvatar($event)">
+        </div>
+      </div>
+
+      <div class="current-images">
+        <ng-container *ngFor="let post of posts">
+          <ng-container *ngFor="let item of post | postImagePipe | async; let i = index">
+            <div class="image-wrap" (click)="chooseCurrentImage(post)">
+              <img [src]="item" alt="">
+            </div>
+          </ng-container>
+        </ng-container>
+      </div>
+    </div>
+
+    <div class="avatar-detail" *ngIf="isChoosed">
+      <div class="dialog-content" *ngIf="!currentPostChoosed">
+        <textarea name="share" class="share-field-big" placeholder="Say Something" [(ngModel)]="content"></textarea>
+      </div>
+      <div class="image-choosed" *ngIf="!currentPostChoosed">
+        <img [src]="avatarImage" alt="">
+      </div>
+      <ng-container *ngIf="currentPostChoosed">
+        <ng-container *ngFor="let item of currentPostChoosed | postImagePipe | async; let i = index">
+           <div class="image-choosed">
+             <img [src]="item" alt="">
+           </div>
+         </ng-container>
+      </ng-container>
+    </div>
+
+  </ng-template>
+
+  <div class="dialog-action" *ngIf="data.type !== 'post' && isChoosed">
+    <button *ngIf="!currentPostChoosed" type="button" class="post-share-btn" (click)="onSubmit()">Save</button>
+    <button *ngIf="currentPostChoosed" type="button" class="post-share-btn" (click)="updateAvatar()">Update</button>
+    <button type="button" class="post-share-btn">cancel</button>
+  </div>
+
+  <div class="dialog-action" *ngIf="data.type === 'post'">
+    <button *ngIf="data.type === 'post'" type="button" class="post-share-btn" (click)="onSubmit()">post</button>
+    <button type="button" class="post-share-btn">cancel</button>
+  </div>
+</div>

@@ -1,0 +1,24 @@
+<div class="friend-list-view">
+  <!-- profile picture end -->
+  <div class="profile-thumb">
+    <a (click)="viewFriend(data.id)" *ngIf="isHaveAvatar">
+      <figure class="profile-thumb-middle" *ngFor="let item of avatar | postImagePipe | async">
+        <img [src]="item" alt="profile picture">
+      </figure>
+      <figure class="profile-thumb-middle" *ngIf="!isHaveAvatar">
+        <img src="../../../../assets/images/photos/no_avatar.jpg" alt="profile picture">
+      </figure>
+    </a>
+    <a (click)="viewFriend(data.id)" *ngIf="!isHaveAvatar">
+      <figure class="profile-thumb-middle">
+        <img src="../../../../assets/images/photos/no_avatar.jpg" alt="profile picture">
+      </figure>
+    </a>
+  </div>
+  <!-- profile picture end -->
+
+  <div class="posted-author">
+    <h6 class="author"><a (click)="viewFriend(data.id)">{{data.firstName +' '+ data.lastName}}</a></h6>
+    <button (click)="viewFriend(data.id)" class="add-frnd">View Info</button>
+  </div>
+</div>

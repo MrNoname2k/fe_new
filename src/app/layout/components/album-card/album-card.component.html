@@ -1,0 +1,16 @@
+<div class="photo-group">
+  <div class="gallery-toggle">
+    <div class="d-none product-thumb-large-view">
+      <ng-container *ngFor="let item of data.posts[0] | postImagePipe | async">
+        <img [src]="item" alt="Photo Gallery">
+      </ng-container>
+    </div>
+    <div class="gallery-overlay" *ngFor="let item of data.posts[0] | postImagePipe | async">
+      <img [src]="item" alt="Photo Gallery">
+      <div class="view-icon"></div>
+    </div>
+    <div class="photo-gallery-caption">
+      <h3 class="photos-caption">{{data.album.name}}({{data.posts.length}})</h3>
+    </div>
+  </div>
+</div>

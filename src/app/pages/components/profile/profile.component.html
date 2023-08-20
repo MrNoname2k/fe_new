@@ -1,0 +1,26 @@
+<app-profile-banner [userInfo]="userInfo" [avatarPostList]="postAvatar"
+  [bannerPostList]="postBanner"></app-profile-banner>
+
+<div class="container">
+  <div class="row">
+    <div class="container" style="margin-top: 20px;">
+      <div class="row">
+        <div class="col-lg-3 order-2 order-lg-1" style="margin-top: 105px; margin-bottom: 60px;">
+          <aside class="widget-area">
+            <app-aside-right></app-aside-right>
+          </aside>
+        </div>
+
+        <div class="col-lg-6 order-1 order-lg-2" style="margin-bottom: 60px;" id="albums">
+          <app-content [postData]="myPost" [type]="'profile'"></app-content>
+        </div>
+
+        <div class="col-lg-3 order-3" style="margin-bottom: 60px;">
+          <aside class="widget-area">
+
+          </aside>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

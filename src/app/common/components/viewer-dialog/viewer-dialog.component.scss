@@ -1,0 +1,129 @@
+.viewer-header {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 50px;
+  background-color: rgb(0 0 0 / 45%);
+  color: #999;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 16px 0 24px;
+  align-items: center;
+  z-index: 1000;
+
+  button {
+    width: 47px;
+    height: 50px;
+
+    .mat-icon {
+      color: #ccc;
+      transition: 0.3s ease;
+    }
+
+    &:hover .mat-icon {
+      color: #fff;
+    }
+
+    &:disabled .mat-icon {
+      color: #747474;
+    }
+
+    &:disabled:hover .mat-icon {
+      color: #747474;
+    }
+  }
+}
+
+.viewer-content {
+  padding-top: 50px;
+  height: 100%;
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  .main-image {
+    height: 80%;
+    padding: 0 64px;
+    .image-center {
+      height: 100%;
+
+      .carousel {
+        height: 100%;
+        .slick-slide {
+          // max-width: 800px;
+          // max-height: 500px;
+
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+      }
+    }
+  }
+
+  .sub-image {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    height: 20%;
+    background-color: rgb(0 0 0 / 45%);
+
+    .sub-image-title {
+      padding: 10px 40px;
+      text-align: center;
+      font-size: 16px;
+      color: #ccc;
+    }
+
+    .sub-image-wrap {
+      display: flex;
+      background-color: #0d0a0a;
+      position: relative;
+      justify-content: center;
+      margin-top: 24px;
+      gap: 5px;
+
+      span {
+        display: block;
+        width: 96px;
+        height: 76px;
+        border-radius: 4px;
+        border: 2px solid #fff;
+        overflow: hidden;
+        object-fit: cover;
+        transition: border-color 0.25s ease;
+        img {
+          width: 100%;
+          height: 100%;
+          transition: transform 0.25s ease;
+        }
+
+        &.active {
+          border-color: #a90707;
+        }
+
+        &:hover {
+          border-color: #a90707;
+        }
+      }
+    }
+  }
+}
+
+.cdk-overlay-dark-backdrop {
+  background-color: rgb(51 51 51 / 90%);
+}
+
+.viewer-content.cdk-overlay-pane {
+  max-width: none !important;
+}
+
+.mdc-dialog__surface {
+  background-color: unset!important;
+  border-radius: none!important;
+  box-shadow: none!important;
+}

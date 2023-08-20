@@ -1,0 +1,136 @@
+<app-profile-banner [userInfo]="user" [avatarPostList]="postAvatar" [bannerPostList]="postBanner"></app-profile-banner>
+
+<!-- Menu second -->
+
+<app-second-menu [fb]="user.linkFacebook" [ig]="user.linkIg"></app-second-menu>
+
+<!-- Profile  Author Details -->
+<div class="about-author-details">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-3">
+        <div class="card widget-item">
+          <div class="about-me">
+            <ul class="nav flex-column about-author-menu">
+              <li><a (click)="showContent('one')" [class]="activeId === 'one' ? 'active' : ''">Something About Me</a>
+              </li>
+              <li><a (click)="showContent('two')" [class]="activeId === 'two' ? 'active' : ''">Working Zone</a></li>
+              <li><a (click)="showContent('three')" [class]="activeId === 'three' ? 'active' : ''">Contact Details</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-9">
+        <div class="about-description">
+          <div class="tab-content">
+            <div class="tab-pane active" *ngIf="activeId ==='one'">
+              <div class="work-zone">
+                <div class="author-desc-title d-flex">
+                  <h6 class="author"><a [routerLink]="['/your-account']">{{user!.firstName +' '+ user!.lastName}}</a>
+                  </h6>
+                  <div class="post-settings-bar">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <div class="post-settings arrow-shape">
+                      <ul>
+                        <li><button>copy link to adda</button></li>
+                        <li><button>edit post</button></li>
+                        <li><button>embed adda</button></li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <p>.</p>
+                <p>{{user.description}}
+                </p>
+              </div>
+            </div>
+            <div class="tab-pane active" *ngIf="activeId ==='two'">
+              <div class="work-zone">
+                <div class="author-desc-title d-flex">
+                  <h6 class="author"><a href="#">Working zone</a></h6>
+                  <div class="post-settings-bar">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <div class="post-settings arrow-shape">
+                      <ul>
+                        <li><button>copy link to adda</button></li>
+                        <li><button>edit post</button></li>
+                        <li><button>embed adda</button></li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <p>Adress: {{user.address}}</p>
+                <p>City: {{user.city}}</p>
+              </div>
+            </div>
+            <div class="tab-pane active" *ngIf="activeId ==='three'">
+              <div class="work-zone">
+                <div class="author-desc-title d-flex">
+                  <h6 class="author"><a href="#">Mili Raoulin</a></h6>
+                  <div class="post-settings-bar">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <div class="post-settings arrow-shape">
+                      <ul>
+                        <li><button>copy link to adda</button></li>
+                        <li><button>edit post</button></li>
+                        <li><button>embed adda</button></li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <p>Phone : {{user.phone != null ? user.phone : 'Not Updated'}}</p>
+                <p>Email : {{user.mail !=null ? user.mail : 'Not Updated'}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="photo-section">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <app-box-card [albums]="albums"></app-box-card>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="friends-section">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <app-box-card [friends]="friends"></app-box-card>
+      </div>
+    </div>
+  </div>
+</div>
+<!--
+<div class="favorite-section">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <app-box-card [favouriteBooks]="favouriteBooks"></app-box-card>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="favorite-section">
+  <div class="container">
+    <div class="row">
+      <div class="col-12" style="margin-bottom: 120px;">
+        <app-box-card [favouriteSports]="favouriteSports"></app-box-card>
+      </div>
+    </div>
+  </div>
+</div> -->

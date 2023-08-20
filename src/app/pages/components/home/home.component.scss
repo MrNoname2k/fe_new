@@ -1,0 +1,22 @@
+@import "../../../../styles/scss/variables";
+@import "../../../../styles/scss/mixins";
+
+.home-page {
+  @include breakpoint("md") {
+    margin-top: 80px !important;
+
+    .home-page__aside--right,
+    .home-page__aside--left {
+      display: none;
+    }
+  }
+
+  @include breakpoint("sm") {
+    margin-top: 80px !important;
+
+    .home-page__aside--right,
+    .home-page__aside--left {
+      display: none;
+    }
+  }
+}

@@ -1,0 +1,22 @@
+<div class="card-container">
+  <div class="card-header" [style.background-image]="'url(' + image + ')'"></div>
+  <div class="card-main">
+    <h3 class="main-title">{{title}}</h3>
+    <p class="main-content">{{data.message}}</p>
+    <div class="main-input" *ngIf="data.type === 'prompt'">
+      <mat-form-field>
+        <input matInput type="text" placeholder="Enter the code" [(ngModel)]="verifyCode">
+      </mat-form-field>
+      <button class="btn" (click)="sendVerifyCode()">
+        Verify Code
+      </button>
+    </div>
+    <div class="main-actions" *ngIf="data.type !== 'prompt'">
+      <button class="btn btn-outline" mat-dialog-close="del" *ngIf="data.type === 'delete'">Delete</button>
+      <button class="btn btn-outline" mat-dialog-close="ok"
+        *ngIf="data.type !== 'delete' && data.type !== 'update'">Ok</button>
+      <button class="btn btn-outline" mat-dialog-close="update" *ngIf="data.type === 'update'">Update</button>
+      <button class="btn" mat-dialog-close="">Cancel</button>
+    </div>
+  </div>
+</div>

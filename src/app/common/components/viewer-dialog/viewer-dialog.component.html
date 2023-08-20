@@ -1,0 +1,70 @@
+<div class="viewer-header">
+  <div class="viewer-header-left">
+
+    <span>{{nextImage + 1}}/{{post.fileEntities.length}}</span>
+
+  </div>
+  <div class="viewer-header-right">
+    <button class="image-sharing">
+      <mat-icon>share</mat-icon>
+    </button>
+    <button class="image-sharing">
+      <mat-icon>content_copy</mat-icon>
+    </button>
+
+    <button class="image-sharing" (click)="onZoom('out')" [disabled]="scaleIndex === 1">
+      <mat-icon>zoom_out</mat-icon>
+    </button>
+    <button class="image-sharing" (click)="onZoom('in')">
+      <mat-icon>zoom_in</mat-icon>
+    </button>
+    <button class="image-sharing">
+      <mat-icon>crop_free</mat-icon>
+    </button>
+
+    <button *ngIf="!isPlayed" class="image-sharing" (click)="autoPlay()">
+      <mat-icon>play_circle_outline</mat-icon>
+    </button>
+    <button *ngIf="isPlayed" class="image-sharing" (click)="onPause()">
+      <mat-icon>pause_circle_outline</mat-icon>
+    </button>
+
+    <button class="image-sharing">
+      <mat-icon>vertical_align_bottom</mat-icon>
+    </button>
+    <button type="button" class="image-sharing" (click)="onDismiss()">
+      <mat-icon>clear</mat-icon>
+    </button>
+  </div>
+</div>
+<div class="viewer-content">
+  <div class="main-image">
+    <div class="image-center">
+
+      <!-- <img src="assets/images/post/post-1.jpg" alt="post image"> -->
+      <ngx-slick-carousel class="carousel"
+       [config]="slideConfig"
+        #slickModal="slick-carousel"
+        (afterChange)="afterChange($event)"
+        (beforeChange)="beforeChange($event)"
+        (init)="slickInit($event)"
+        >
+        <div ngxSlickItem *ngFor="let item of post | postImagePipe | async; let i = index">
+          <!-- <img src="{{item}}" alt="profile picture" [style.transform]="'scale(' + (i === nextImage ? scaleIndex : 1) + ')'"> -->
+          <img  [src]="item" alt="profile picture" [style.transform]="'scale(' + (i === nextImage ? scaleIndex : 1) + ')'">
+        </div>
+      </ngx-slick-carousel>
+
+    </div>
+  </div>
+  <div class="sub-image">
+    <div class="sub-image-title">
+      <span>Post Image</span>
+    </div>
+    <div class="sub-image-wrap">
+      <span (click)="slickModal.slickGoTo(i)" *ngFor="let image of post | postImagePipe | async; let i = index" [ngClass]="nextImage === i ? 'active' : ''">
+        <img [src]="image" alt="post image">
+      </span>
+    </div>
+  </div>
+</div>

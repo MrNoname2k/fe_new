@@ -1,0 +1,25 @@
+
+<div class="home-page container" style="margin-top: 40px;">
+  <div class="row">
+    <div class="home-page__aside--left col-lg-3 order-2 order-lg-1" style="margin-bottom: 60px;">
+      <aside class="widget-area">
+        <app-card-info [userInfo]="userInfo" [avatarPostList]="postAvatar"
+          [bannerPostList]="postBanner"></app-card-info>
+        <div class="friend-zone">
+          <app-aside-left [asideLeftData]="asideLeftData"></app-aside-left>
+        </div>
+      </aside>
+    </div>
+
+    <div class="home-page__content col-lg-6 order-1 order-lg-2" style="margin-bottom: 60px;">
+      <app-search-bar (openDialgEvent)="opentDialog($event)" [userInfo]="userInfo"></app-search-bar>
+      <app-content [postData]="postPageData"></app-content>
+    </div>
+
+    <div class="home-page__aside--right col-lg-3 order-3" style="margin-bottom: 60px;">
+      <aside class="widget-area">
+        <app-aside-right [asideRightData]="asideRightData"></app-aside-right>
+      </aside>
+    </div>
+  </div>
+</div>

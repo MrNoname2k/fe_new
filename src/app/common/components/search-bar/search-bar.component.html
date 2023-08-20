@@ -1,0 +1,23 @@
+<div class="card card-small">
+  <div class="share-box-inner">
+    <!-- profile picture end -->
+    <div class="profile-thumb">
+      <a (click)="navigateService.navigateToPage('/profile', userInfo.id)">
+        <figure class="profile-thumb-middle" *ngFor="let url of avatar | postImagePipe | async">
+          <img [src]="url" alt="profile picture">
+        </figure>
+      </a>
+    </div>
+    <!-- profile picture end -->
+
+    <!-- share content box start -->
+    <div class="share-content-box w-100">
+      <form class="share-text-box">
+        <textarea (mousedown)="openDialgEvent.emit('share')" name="share" class="share-text-field" aria-disabled="true"
+          placeholder="Say Something" id="email"></textarea>
+        <button class="btn-share" type="submit">share</button>
+      </form>
+    </div>
+    <!-- share content box end -->
+  </div>
+</div>

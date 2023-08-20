@@ -1,0 +1,27 @@
+
+<div class="content-box">
+
+  <h5 class="content-title">{{data.title}}</h5>
+  <div class="content-body">
+    <ng-container *ngIf="dataAlbums">
+      <div class="row mt--30">
+        <div class="col-sm-6 col-md-4" *ngFor="let item of dataAlbums">
+          <app-album-card [albumData]="item"></app-album-card>
+        </div>
+        <div class="col-12">
+          <div class="load-more text-center">
+            <button class="load-more-btn">load more</button>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="data.type === 'friends'">
+      <div class="row mt--20">
+        <div class="col-lg-3 col-sm-6" *ngFor="let item of dataFriends">
+          <app-friend-card [friendData]="item"></app-friend-card>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</div>

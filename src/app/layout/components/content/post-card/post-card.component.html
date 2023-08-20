@@ -1,0 +1,78 @@
+<div class="card" *ngFor="let post of postList">
+  <!-- post title start -->
+  <div class="post-title d-flex align-items-center">
+    <!-- profile picture end -->
+    <div class="profile-thumb">
+      <a (click)="navigateService.navigateToPage('/profile', post.idUserCreate.id)">
+        <ng-container>
+          <ng-container *ngFor="let url of avatarPost | postImagePipe | async">
+            <figure class="profile-thumb-middle">
+              <img [src]="url ? url : '../../../../assets/images/profile/profile-small-10.jpg'" alt="profile picture">
+            </figure>
+          </ng-container>
+        </ng-container>
+      </a>
+    </div>
+    <!-- profile picture end  -->
+
+    <div class="posted-author">
+      <h6 class="author"><a
+          (click)="navigateService.navigateToPage('/profile', post.idUserCreate.id)">{{post.idUserCreate.lastName + ' '
+          + post.idUserCreate.firstName}}</a></h6>
+      <span class="post-time">{{utils.convertTimeToNotify(utils.getTimestamp(post.createDate + ''!))}}</span>
+
+    </div>
+
+    <!-- <div class="post-settings-bar">
+      <span></span>
+      <span></span>
+      <span></span>
+      <div class="post-settings arrow-shape">
+        <ul>
+          <li><button>copy link to ago</button></li>
+          <li><button>edit post</button></li>
+          <li><button>embed ago</button></li>
+        </ul>
+      </div>
+    </div> -->
+  </div>
+  <!-- post title start -->
+  <div class="post-content">
+    <p class="post-desc">
+      {{post.content}}
+    </p>
+
+    <div class="post-thumb-gallery" *ngIf="post" (click)="openViewerDialog(post)">
+      <mat-grid-list cols="2" rowHeight="fit" class="image-group" gutterSize="3">
+        <mat-grid-tile class="image-item" *ngFor="let item of post | postImagePipe | async; let i = index"
+          [colspan]="post.fileEntities.length === 1 ? 2 : 1">
+
+          <img [defaultImage]="defaultImage" [lazyLoad]="item" />
+        </mat-grid-tile>
+      </mat-grid-list>
+    </div>
+
+    <div class="post-meta">
+      <button class="post-meta-like" appLikeEvent [data]="post">
+        <i class="bi bi-heart-beat"></i>
+
+        <span class="listLiker">{{post.likes | listLikePipe}}</span>
+
+      </button>
+      <ul class="comment-share-meta">
+        <li>
+          <button class="post-comment" (click)="openComment(post)">
+            <i class="bi bi-chat-bubble"></i>
+            <span>{{post.comments.length}}</span>
+          </button>
+        </li>
+        <!-- <li>
+          <button class="post-share">
+            <i class="bi bi-share"></i>
+            <span>07</span>
+          </button>
+        </li> -->
+      </ul>
+    </div>
+  </div>
+</div>

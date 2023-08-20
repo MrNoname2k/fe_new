@@ -1,0 +1,311 @@
+<!-- header area start -->
+<header class="header--large">
+  <mat-toolbar class="header-toolbar">
+    <div class="header-wrap bg-white sticky">
+      <div class="container">
+        <div class="row header-row">
+          <div class="header-left">
+            <div class="tool-bar-item">
+              <button class="show-menu-btn active" (click)="getHomePage()" skipLocationChange>Home</button>
+            </div>
+            <div class="tool-bar-item">
+              <button class="show-menu-btn" [matMenuTriggerFor]="menu1" (click)="btnAction('message')"><span
+                  [matBadge]="numberOfMessageUnchecked" matBadgeColor="warn" matBadgePosition="after"
+                  [matBadgeHidden]="numberOfMessageUnchecked ? false : true">Message</span></button>
+              <mat-menu #menu1="matMenu">
+                <app-popup-menu [popupProperties]="popupProperties"></app-popup-menu>
+              </mat-menu>
+            </div>
+            <div class="tool-bar-item">
+              <button class="show-menu-btn" [matMenuTriggerFor]="menu2" (click)="btnAction('notification')"><span
+                  [matBadge]="numberOfNotificationUnchecked" matBadgeColor="warn" matBadgePosition="after"
+                  [matBadgeHidden]="numberOfNotificationUnchecked ? false : true">Notification</span></button>
+              <mat-menu #menu2="matMenu">
+                <app-popup-menu [popupProperties]="popupProperties"></app-popup-menu>
+              </mat-menu>
+            </div>
+          </div>
+          <div class="header-center">
+            <img src="assets/images/logo/logo.png" alt="brand logo">
+          </div>
+          <div class="header-right">
+            <div class="header-right-search">
+              <form class="search-form">
+                <input class="search-field" type="text" matInput placeholder="Ex. pat@example.com">
+                <button>
+                  <mat-icon>search</mat-icon>
+                </button>
+              </form>
+            </div>
+            <div class="header-right-info">
+              <button [matMenuTriggerFor]="menu3">
+                <ng-container *ngIf="!avatar">
+                  <img src="../../../../assets/images/profile/profile-small-1.jpg" alt="profile picture">
+                </ng-container>
+                <ng-container *ngFor="let url of avatar | postImagePipe | async">
+                  <img [src]="url" alt="profile picture">
+                </ng-container>
+              </button>
+              <mat-menu #menu3="matMenu">
+                <div class="profile-dropdown">
+                  <div class="profile-head">
+                    <h5 class="name"><a [routerLink]="['/profile']">{{userInfo?.firstName + ' ' +
+                        userInfo?.lastName}}</a></h5>
+                    <a class="mail" [routerLink]="['/profile']">{{userInfo?.mail}}</a>
+                  </div>
+                  <div class="profile-body">
+                    <ul>
+                      <li><a [routerLink]="['/profile']"><i class="flaticon-user"></i>Profile</a></li>
+                      <li><a href="#"><i class="flaticon-message"></i>Inbox</a></li>
+                      <li><a href="#"><i class="flaticon-document"></i>Activity</a></li>
+                    </ul>
+                    <ul>
+                      <li><a href="#"><i class="flaticon-settings"></i>Setting</a></li>
+                      <li><a (click)="doLogout()"><i class="flaticon-unlock"></i>Log out</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </mat-menu>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </mat-toolbar>
+</header>
+<!-- header area end -->
+
+<header class="header--small">
+  <div class="mobile-header-wrapper">
+    <div class="mobile-header">
+      <div class="mobile-logo">
+        <a (click)="getHomePage()">
+          <img src="assets/images/logo/logo-white.png" alt="logo">
+        </a>
+      </div>
+      <div class="mobile-menu">
+        <div class="menu-list">
+          <div class="menu-item">
+            <button class="menu-item__btn" (click)="openMenuListNumber = 1">
+              <mat-icon>group</mat-icon>
+            </button>
+            <div class="menu-item__list" *ngIf="openMenuListNumber === 1">
+              <button class="menu-item__btn--close" (click)="openMenuListNumber = 0">
+                <mat-icon>close</mat-icon>
+              </button>
+              <div class="friend__confirm">
+                <figure class="friend__img-wrap">
+                  <img src="../../../../assets/images/post/post-1.jpg" alt="">
+                </figure>
+                <div class="friend__info">
+                  <h5 class="friend__name">Nguyen Linh</h5>
+                  <p class="friend__description">Work at Enlab</p>
+                  <div class="btn-group">
+                    <button class="confirm-btn">Confirm</button>
+                    <button class="cancel-btn">Cancel</button>
+                  </div>
+                </div>
+              </div>
+              <div class="friend__confirm">
+                <figure class="friend__img-wrap">
+                  <img src="../../../../assets/images/post/post-1.jpg" alt="">
+                </figure>
+                <div class="friend__info">
+                  <h5 class="friend__name">Nguyen Linh</h5>
+                  <p class="friend__description">Work at Enlab</p>
+                  <div class="btn-group">
+                    <button class="confirm-btn">Confirm</button>
+                    <button class="cancel-btn">Cancel</button>
+                  </div>
+                </div>
+              </div>
+              <div class="friend__confirm">
+                <figure class="friend__img-wrap">
+                  <img src="../../../../assets/images/post/post-1.jpg" alt="">
+                </figure>
+                <div class="friend__info">
+                  <h5 class="friend__name">Nguyen Linh</h5>
+                  <p class="friend__description">Work at Enlab</p>
+                  <div class="btn-group">
+                    <button class="confirm-btn">Confirm</button>
+                    <button class="cancel-btn">Cancel</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="menu-item">
+            <button class="menu-item__btn" (click)="openMenuListNumber = 2">
+              <mat-icon>notifications</mat-icon>
+            </button>
+            <div class="menu-item__list" *ngIf="openMenuListNumber === 2">
+              <button class="menu-item__btn--close" (click)="openMenuListNumber = 0">
+                <mat-icon>close</mat-icon>
+              </button>
+              <div class="friend__confirm">
+                <figure class="friend__img-wrap">
+                  <img src="../../../../assets/images/post/post-1.jpg" alt="">
+                </figure>
+                <div class="friend__info">
+                  <h5 class="friend__name">Nguyen Linh</h5>
+                  <p class="friend__description">Work at Enlab</p>
+                </div>
+              </div>
+              <div class="friend__confirm">
+                <figure class="friend__img-wrap">
+                  <img src="../../../../assets/images/post/post-1.jpg" alt="">
+                </figure>
+                <div class="friend__info">
+                  <h5 class="friend__name">Nguyen Linh</h5>
+                  <p class="friend__description">Work at Enlab</p>
+                </div>
+              </div>
+              <div class="friend__confirm">
+                <figure class="friend__img-wrap">
+                  <img src="../../../../assets/images/post/post-1.jpg" alt="">
+                </figure>
+                <div class="friend__info">
+                  <h5 class="friend__name">Nguyen Linh</h5>
+                  <p class="friend__description">Work at Enlab</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="menu-item">
+            <button class="menu-item__btn" (click)="openMenuListNumber = 3">
+              <mat-icon>speaker_notes</mat-icon>
+            </button>
+            <div class="messagebox" *ngIf="openMenuListNumber === 3">
+              <header class="messagebox-header">
+                <div class="message-header__info">
+                  <figure class="message-header__img-wrap">
+                    <img src="../../../../assets/images/profile/profile-small-1.jpg" alt="">
+                  </figure>
+                  <div class="message-header__text">
+                    <h5 class="message-header__name">Linh nguyen</h5>
+                    <p class="message-header__status">Active Now</p>
+                  </div>
+                </div>
+                <div class="message-header__controls">
+                  <button>
+                    <mat-icon>settings</mat-icon>
+                  </button>
+                  <button (click)="openMenuListNumber = 0">
+                    <mat-icon>close</mat-icon>
+                  </button>
+                </div>
+              </header>
+              <div class="messagebox-body">
+                <div class="message-tag">
+                  <span>s dsds dsdsd sđ sds ds dsd sd sdsds dsds ds</span>
+                </div>
+                <div class="message-tag message-tag--auth">
+                  <span>s dsds dsdsd sđ sds ds dsd sd sdsds dsds ds</span>
+                </div>
+                <div class="message-tag">
+                  <span>s dsds dsdsd sđ sds ds dsd sd sdsds dsds ds</span>
+                </div>
+                <div class="message-tag message-tag--auth">
+                  <span>s dsds dsdsd sđ sds ds dsd sd sdsds dsds ds</span>
+                </div>
+                <div class="message-tag">
+                  <span>s dsds dsdsd sđ sds ds dsd sd sdsds dsds ds</span>
+                </div>
+                <div class="message-tag message-tag--auth">
+                  <span>s dsds dsdsd sđ sds ds dsd sd sdsds dsds ds</span>
+                </div>
+                <div class="message-tag">
+                  <span>s dsds dsdsd sđ sds ds dsd sd sdsds dsds ds</span>
+                </div>
+                <div class="message-tag message-tag--auth">
+                  <span>s dsds dsdsd sđ sds ds dsd sd sdsds dsds ds</span>
+                </div>
+                <div class="message-tag">
+                  <span>s dsds dsdsd sđ sds ds dsd sd sdsds dsds ds</span>
+                </div>
+                <div class="message-tag message-tag--auth">
+                  <span>s dsds dsdsd sđ sds ds dsd sd sdsds dsds ds</span>
+                </div>
+                <div class="message-tag">
+                  <span>s dsds dsdsd sđ sds ds dsd sd sdsds dsds ds</span>
+                </div>
+                <div class="message-tag message-tag--auth">
+                  <span>s dsds dsdsd sđ sds ds dsd sd sdsds dsds ds</span>
+                </div>
+                <div class="message-tag">
+                  <span>s dsds dsdsd sđ sds ds dsd sd sdsds dsds ds</span>
+                </div>
+                <div class="message-tag message-tag--auth">
+                  <span>s dsds dsdsd sđ sds ds dsd sd sdsds dsds ds</span>
+                </div>
+              </div>
+              <div class="messagebox-bottom">
+                <textarea placeholder="Message..."></textarea>
+                <button>
+                  <img src="../../../../assets/images/icons/plane.png" alt="">
+                </button>
+              </div>
+
+            </div>
+          </div>
+          <div class="menu-item">
+            <button class="menu-item__btn" (click)="openMenuListNumber = 4">
+              <mat-icon>search</mat-icon>
+            </button>
+            <div class="menu-item__list" *ngIf="openMenuListNumber === 4">
+              <div class="search-bar">
+                <button class="menu-item__btn--close" (click)="openMenuListNumber = 0">
+                  <mat-icon>
+                    close
+                  </mat-icon>
+                </button>
+                <textarea placeholder="Search Here"></textarea>
+                <button>
+                  <mat-icon>search</mat-icon>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="mobile-user-info">
+
+        <button [matMenuTriggerFor]="menu4">
+          <ng-container *ngIf="!avatar">
+            <figure class="user-info-image__wrap">
+              <img src="../../../../assets/images/profile/profile-small-1.jpg" alt="profile picture">
+            </figure>
+          </ng-container>
+          <ng-container *ngFor="let url of avatar | postImagePipe | async">
+            <figure class="user-info-image__wrap">
+              <img [src]="url" alt="profile picture">
+            </figure>
+          </ng-container>
+        </button>
+
+        <mat-menu #menu4="matMenu">
+          <div class="profile-dropdown">
+            <div class="profile-head">
+              <h5 class="name"><a [routerLink]="['/profile']">{{userInfo?.firstName + ' ' +
+                  userInfo?.lastName}}</a></h5>
+              <a class="mail" [routerLink]="['/profile']">{{userInfo?.mail}}</a>
+            </div>
+            <div class="profile-body">
+              <ul>
+                <li><a [routerLink]="['/profile']"><i class="flaticon-user"></i>Profile</a></li>
+                <li><a href="#"><i class="flaticon-message"></i>Inbox</a></li>
+                <li><a href="#"><i class="flaticon-document"></i>Activity</a></li>
+              </ul>
+              <ul>
+                <li><a href="#"><i class="flaticon-settings"></i>Setting</a></li>
+                <li><a (click)="doLogout()"><i class="flaticon-unlock"></i>Log out</a></li>
+              </ul>
+            </div>
+          </div>
+        </mat-menu>
+
+      </div>
+    </div>
+  </div>
+</header>

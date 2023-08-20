@@ -1,0 +1,139 @@
+@import "../../../../styles/scss/variables";
+
+.profile-banner-large {
+  height: 370px;
+  background-image: url(../../../../assets/images/banner/profile-banner.jpg);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  //responsive
+  @media #{$md-device} {
+    height: 270px;
+  }
+  @media #{$sm-device} {
+    height: 190px;
+  }
+}
+
+.main-menu {
+  li {
+    display: inline-block;
+  }
+}
+.profile-edit-panel {
+  text-align: right;
+}
+.edit-btn {
+  color: $white;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1;
+  padding: 11px 28px;
+  display: inline-block;
+  border-radius: 50px;
+  text-transform: capitalize;
+  background-color: $theme-color;
+  //responsive
+  @media #{$sm-device} {
+    padding: 11px 15px;
+  }
+  &:hover {
+    background-color: $black-soft;
+  }
+}
+
+.profile-picture-box {
+  position: absolute;
+  transform: translateY(calc(-50% - 10px));
+  background-color: $white;
+  z-index: 1;
+  //responsive
+  @media #{$lg-device} {
+    transform: translateY(calc(-50% - 10px));
+  }
+  @media #{$sm-device} {
+    left: 0;
+    right: 0;
+    margin: auto;
+    width: 100px;
+  }
+}
+.secondary-navigation-style {
+  .profile-picture-box {
+    transform: translateY(calc(-50% - 17px));
+  }
+}
+.profile-picture {
+  position: relative;
+  //responsive
+  @media #{$xs-device} {
+    width: 100px;
+  }
+  &:before {
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    content: "";
+    position: absolute;
+    pointer-events: none;
+    border: 10px solid $white;
+    // responsive
+    @media #{$sm-device} {
+      border: 5px solid $white;
+    }
+  }
+}
+.profile-sidebar {
+  margin-top: 105px;
+}
+
+// about author
+.author-into-list {
+  margin-top: 27px;
+  li {
+    margin-bottom: 10px;
+    &:last-child {
+      margin-bottom: 0;
+    }
+    a {
+      color: $black-soft;
+      font-size: 14px;
+      font-weight: 500;
+      line-height: 1.3;
+      &:hover {
+        color: $theme-color;
+      }
+      i {
+        color: $theme-color;
+        font-size: 20px;
+        padding-right: 20px;
+        //responsive
+        @media #{$lg-device} {
+          padding-right: 8px;
+        }
+      }
+    }
+  }
+}
+
+.header-top-navigation ul li {
+  display: inline-block;
+  margin-right: 60px;
+  position: relative;
+
+  &.active a {
+    color: #dc4734;
+  }
+
+  a {
+    color: #333333;
+    display: block;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1;
+    padding: 21px 0;
+    text-transform: capitalize;
+  }
+}

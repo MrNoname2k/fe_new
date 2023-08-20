@@ -1,0 +1,51 @@
+// Overlay Mixin
+
+@mixin overlay($color: #000, $opacity: 0.6) {
+  background-color: rgba($color, $opacity);
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+}
+
+@mixin breakpoint($breakpoint) {
+  @if $breakpoint == "xlmax" {
+    @media #{$xlmax-device} {
+      @content;
+    }
+  } @else if $breakpoint == "xlmid" {
+    @media #{$xlmid-device} {
+      @content;
+    }
+  } @else if $breakpoint == "xxl" {
+    @media #{$xxl-device} {
+      @content;
+    }
+  } @else if $breakpoint == "xl" {
+    @media #{$xl-device} {
+      @content;
+    }
+  } @else if $breakpoint == "lg" {
+    @media #{$lg-device} {
+      @content;
+    }
+  } @else if $breakpoint == "md" {
+    @media #{$md-device} {
+      @content;
+    }
+  } @else if $breakpoint == "sm" {
+    @media #{$sm-device} {
+      @content;
+    }
+  } @else if $breakpoint == "xs" {
+    @media #{$xs-device} {
+      @content;
+    }
+  } @else if $breakpoint == "xxs" {
+    @media #{$xxs-device} {
+      @content;
+    }
+  }
+}
